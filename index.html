@@ -1,383 +1,446 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elige tu Concierto - Palau Sant Jordi Barcelona</title>
-    <style>
-        :root {
-            --color-primary: #2180c1;
-            --color-primary-hover: #1a5fa0;
-            --color-secondary: #e63946;
-            --color-secondary-hover: #d62828;
-            --color-bg: #f5f5f5;
-            --color-surface: #ffffff;
-            --color-text: #1a1a1a;
-            --color-text-light: #666;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elige tu Concierto - Palau Sant Jordi Barcelona</title>
+  <style>
+    :root {
+      --color-primary: #2180c1;
+      --color-primary-hover: #1a5fa0;
+      --color-secondary: #e63946;
+      --color-secondary-hover: #d62828;
+      --color-bg: #f5f5f5;
+      --color-surface: #ffffff;
+      --color-text: #1a1a1a;
+      --color-text-light: #666;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 50%, #f5f7fa 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 50%, #f5f7fa 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      font-size: 16px; /* tamaño base más legible */
+    }
 
-        .container {
-            max-width: 900px;
-            width: 100%;
-        }
+    .card-face {
+      font-size: 1.1rem;
+    }
 
-        .header {
-            text-align: center;
-            color: var(--color-text);
-            margin-bottom: 50px;
-        }
+    .click-text {
+      font-size: 0.9rem;
+    }
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: none;
-            color: var(--color-primary);
-        }
+    .concert-info {
+      font-size: 0.95rem;
+    }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            color: var(--color-text-light);
-        }
+    .concert-date {
+      font-size: 0.95rem;
+    }
 
-        .cards-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 30px;
-        }
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
 
-        .card-wrapper {
-            perspective: 1000px;
-        }
+    .header {
+      text-align: center;
+      color: var(--color-text);
+      margin-bottom: 50px;
+    }
 
-        .card {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            cursor: pointer;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-        }
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: none;
+      color: var(--color-primary);
+    }
 
-        .card.flipped {
-            transform: rotateY(180deg);
-        }
+    .header p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      color: var(--color-text-light);
+    }
 
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-            font-size: 1.3rem;
-        }
+    .cards-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 30px;
+    }
 
-        .card-front {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
+    .card-wrapper {
+      perspective: 1000px;
+    }
 
-        /* ROSALÍA - Gradiente azul como el anterior de Nathy */
-        .card-front.rosalia {
-            background: linear-gradient(135deg, #30b0c8 0%, #1e6a7a 100%);
-        }
+    .card {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s;
+    }
 
-        /* NATHY PELUSO - Gradiente suave con rojo similar al álbum */
-        .card-front.nathy {
-            background: linear-gradient(135deg, #c41e3a 0%, #e63946 100%);
-        }
+    .card.flipped {
+      transform: rotateY(180deg);
+    }
 
-        .card-front-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      font-weight: bold;
+    }
 
-        .question-mark {
-            font-size: 4rem;
-            opacity: 0.7;
-        }
+    .card-front {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
 
-        .click-text {
-            font-size: 0.95rem;
-            opacity: 0.85;
-        }
+    /* ROSALÍA - Gradiente azul como el anterior de Nathy */
+    .card-front.rosalia {
+      background: linear-gradient(135deg, #30b0c8 0%, #1e6a7a 100%);
+    }
 
-        .card-back {
-            background: white;
-            color: var(--color-text);
-            transform: rotateY(180deg);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
+    /* NATHY PELUSO - Gradiente suave con rojo similar al álbum */
+    .card-front.nathy {
+      background: linear-gradient(135deg, #c41e3a 0%, #e63946 100%);
+    }
 
-        .card-back img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
+    .card-front-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
 
-        .card-back-content {
-            text-align: center;
-            width: 100%;
-        }
+    .question-mark {
+      font-size: 4rem;
+      opacity: 0.7;
+    }
 
-        .artist-name {
-            font-size: 1.8rem;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--color-primary);
-        }
+    .click-text {
+      opacity: 0.85;
+    }
 
-        .artist-name.nathy {
-            color: var(--color-secondary);
-        }
+    .card-back {
+      background: white;
+      color: var(--color-text);
+      transform: rotateY(180deg);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
 
-        .concert-info {
-            font-size: 0.95rem;
-            color: var(--color-text-light);
-            line-height: 1.6;
-        }
+    .card-back img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
 
-        .concert-date {
-            background: var(--color-bg);
-            padding: 10px 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-            font-weight: 600;
-            color: var(--color-primary);
-        }
+    .card-back-content {
+      text-align: center;
+      width: 100%;
+    }
 
-        .concert-date.nathy {
-            color: var(--color-secondary);
-        }
+    .artist-name {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: var(--color-primary);
+    }
 
-        .info-section {
-            text-align: center;
-            color: var(--color-text);
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 25px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(33, 128, 193, 0.1);
-        }
+    .artist-name.nathy {
+      color: var(--color-secondary);
+    }
 
-        .info-section h2 {
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-            color: var(--color-primary);
-        }
+    .concert-info {
+      color: var(--color-text-light);
+      line-height: 1.6;
+    }
 
-        .info-section p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--color-text-light);
-        }
+    .concert-date {
+      background: var(--color-bg);
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
 
-        .location {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-            font-size: 1.05rem;
-        }
+    .concert-date.nathy {
+      color: var(--color-secondary);
+    }
 
-        .spotify-player {
-            margin-top: 15px !important;
-        }
+    .info-section {
+      text-align: center;
+      color: var(--color-text);
+      margin-top: 30px;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 25px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(33, 128, 193, 0.1);
+    }
 
-        @media (max-width: 768px) {
-            .cards-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
+    .info-section h2 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      color: var(--color-primary);
+    }
 
-            .header h1 {
-                font-size: 1.8rem;
-            }
+    .info-section p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--color-text-light);
+    }
 
-            .card {
-                height: 350px;
-            }
+    .location {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+      font-size: 1.05rem;
+    }
 
-            .card-front {
-                font-size: 1.1rem;
-            }
+    .spotify-player {
+      margin-top: 15px !important;
+    }
 
-            .artist-name {
-                font-size: 1.5rem;
-            }
+    /* Tablet y móvil en vertical */
+    @media (max-width: 768px) {
+      .container {
+        max-width: 100%;
+      }
 
-            .question-mark {
-                font-size: 3rem;
-            }
-        }
+      .cards-container {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
 
-        @media (max-width: 480px) {
-            .header h1 {
-                font-size: 1.5rem;
-            }
+      .card {
+        height: auto;
+        min-height: 360px;
+      }
 
-            .header p {
-                font-size: 0.95rem;
-            }
+      .card-front,
+      .card-back {
+        padding: 20px;
+      }
 
-            .cards-container {
-                gap: 20px;
-            }
+      .header h1 {
+        font-size: 1.7rem;
+      }
 
-            .card {
-                height: 300px;
-            }
+      .card-front {
+        font-size: 1.1rem;
+      }
 
-            .card-back {
-                padding: 20px;
-            }
+      .artist-name {
+        font-size: 1.6rem;
+      }
 
-            .card-back img {
-                height: 200px;
-            }
+      .concert-info {
+        font-size: 1rem;
+      }
 
-            .info-section {
-                padding: 20px;
-            }
-        }
-    </style>
+      .concert-date {
+        font-size: 1rem;
+      }
+
+      .question-mark {
+        font-size: 3.2rem;
+      }
+    }
+
+    /* Móviles pequeños */
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.4rem;
+      }
+
+      .header p {
+        font-size: 0.95rem;
+      }
+
+      .cards-container {
+        gap: 18px;
+      }
+
+      .card {
+        min-height: 340px;
+      }
+
+      .card-back {
+        padding: 18px;
+      }
+
+      .card-back img {
+        height: 180px;
+      }
+
+      .info-section {
+        padding: 18px;
+      }
+
+      .artist-name {
+        font-size: 1.4rem;
+      }
+
+      .concert-info {
+        font-size: 0.95rem;
+      }
+
+      .concert-date {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🎵 Choose Your Fighter 🎵</h1>
-        </div>
-
-        <div class="cards-container">
-            <!-- Tarjeta Rosalía -->
-            <div class="card-wrapper">
-                <div class="card" onclick="toggleCard(this, 0)">
-                    <!-- Front -->
-                    <div class="card-face card-front rosalia">
-                        <div class="card-front-content">
-                            <div class="question-mark">🎭</div>
-                            <div>Opción A</div>
-                            <div class="click-text">(Haz clic para revelar)</div>
-                        </div>
-                    </div>
-                    <!-- Back -->
-                    <div class="card-face card-back rosalia">
-                        <img src="https://pplx-res.cloudinary.com/image/upload/v1767456199/search_images/a21a27ccb6c743ee201ba591e0e00b7adcf442cd.jpg" alt="Rosalía LUX">
-                        <div class="card-back-content">
-                            <div class="artist-name">ROSALÍA</div>
-                            <div class="concert-info">
-                                LUX TOUR 2026
-                                <div class="concert-date">
-                                    🗓️ 13 de abril 2026<br>
-                                    📍 Palau Sant Jordi
-                                </div>
-                            </div>
-                            <iframe class="spotify-player" style="border-radius:12px; border:none; height:80px;" src="https://open.spotify.com/embed/track/4ORvXsPK9AJmDzm36BYcdy?utm_source=generator" width="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tarjeta Nathy Peluso -->
-            <div class="card-wrapper">
-                <div class="card" onclick="toggleCard(this, 1)">
-                    <!-- Front -->
-                    <div class="card-face card-front nathy">
-                        <div class="card-front-content">
-                            <div class="question-mark">🎤</div>
-                            <div>Opción B</div>
-                            <div class="click-text">(Haz clic para revelar)</div>
-                        </div>
-                    </div>
-                    <!-- Back -->
-                    <div class="card-face card-back nathy">
-                        <img src="https://pplx-res.cloudinary.com/image/upload/v1767456200/search_images/3fc313a8a7211f50221c159ffe6a5b5cbfda7dbd.jpg" alt="Nathy Peluso GRASA">
-                        <div class="card-back-content">
-                            <div class="artist-name nathy">NATHY PELUSO</div>
-                            <div class="concert-info">
-                                GRASA TOUR 2026
-                                <div class="concert-date nathy">
-                                    🗓️ 14 de febrero 2026<br>
-                                    📍 Palau Sant Jordi
-                                </div>
-                            </div>
-                            <iframe class="spotify-player" style="border-radius:12px; border:none; height:80px;" src="https://open.spotify.com/embed/track/47Y7zbY54UmViUUDUrq7Sk?utm_source=generator" width="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <h1>🎵 Choose Your Fighter 🎵</h1>
     </div>
 
-    <script>
-        function toggleCard(cardElement, cardIndex) {
-            const cards = document.querySelectorAll('.card');
-            const otherCardIndex = cardIndex === 0 ? 1 : 0;
-            
-            // Pausa la música de la otra tarjeta si está abierta
-            if (cards[otherCardIndex].classList.contains('flipped')) {
-                const otherIframe = cards[otherCardIndex].querySelector('iframe');
-                if (otherIframe) {
-                    otherIframe.contentWindow.postMessage({command: 'pause'}, '*');
-                }
-                cards[otherCardIndex].classList.remove('flipped');
-            }
-            
-            // Activa/desactiva la tarjeta seleccionada
-            cardElement.classList.toggle('flipped');
-            
-            // Si se abre la tarjeta, reproduce la música
-            if (cardElement.classList.contains('flipped')) {
-                setTimeout(() => {
-                    const iframe = cardElement.querySelector('iframe');
-                    if (iframe) {
-                        iframe.focus();
-                        iframe.contentWindow.postMessage({command: 'play'}, '*');
-                    }
-                }, 300);
-            } else {
-                // Si se cierra, pausa la música
-                const iframe = cardElement.querySelector('iframe');
-                if (iframe) {
-                    iframe.contentWindow.postMessage({command: 'pause'}, '*');
-                }
-            }
+    <div class="cards-container">
+      <!-- Tarjeta Rosalía -->
+      <div class="card-wrapper">
+        <div class="card" onclick="toggleCard(this, 0)">
+          <!-- Front -->
+          <div class="card-face card-front rosalia">
+            <div class="card-front-content">
+              <div class="question-mark">🎭</div>
+              <div>Opción A</div>
+              <div class="click-text">(Haz clic para revelar)</div>
+            </div>
+          </div>
+          <!-- Back -->
+          <div class="card-face card-back rosalia">
+            <img src="https://pplx-res.cloudinary.com/image/upload/v1767456199/search_images/a21a27ccb6c743ee201ba591e0e00b7adcf442cd.jpg" alt="Rosalía LUX">
+            <div class="card-back-content">
+              <div class="artist-name">ROSALÍA</div>
+              <div class="concert-info">
+                LUX TOUR 2026
+                <div class="concert-date">
+                  🗓️ 13 de abril 2026<br>
+                  📍 Palau Sant Jordi
+                </div>
+              </div>
+              <iframe
+                class="spotify-player"
+                style="border-radius:12px; border:none; height:80px;"
+                src="https://open.spotify.com/embed/track/4ORvXsPK9AJmDzm36BYcdy?utm_source=generator"
+                width="100%"
+                frameborder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tarjeta Nathy Peluso -->
+      <div class="card-wrapper">
+        <div class="card" onclick="toggleCard(this, 1)">
+          <!-- Front -->
+          <div class="card-face card-front nathy">
+            <div class="card-front-content">
+              <div class="question-mark">🎤</div>
+              <div>Opción B</div>
+              <div class="click-text">(Haz clic para revelar)</div>
+            </div>
+          </div>
+          <!-- Back -->
+          <div class="card-face card-back nathy">
+            <img src="https://pplx-res.cloudinary.com/image/upload/v1767456200/search_images/3fc313a8a7211f50221c159ffe6a5b5cbfda7dbd.jpg" alt="Nathy Peluso GRASA">
+            <div class="card-back-content">
+              <div class="artist-name nathy">NATHY PELUSO</div>
+              <div class="concert-info">
+                GRASA TOUR 2026
+                <div class="concert-date nathy">
+                  🗓️ 14 de febrero 2026<br>
+                  📍 Palau Sant Jordi
+                </div>
+              </div>
+              <iframe
+                class="spotify-player"
+                style="border-radius:12px; border:none; height:80px;"
+                src="https://open.spotify.com/embed/track/47Y7zbY54UmViUUDUrq7Sk?utm_source=generator"
+                width="100%"
+                frameborder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleCard(cardElement, cardIndex) {
+      const cards = document.querySelectorAll('.card');
+      const otherCardIndex = cardIndex === 0 ? 1 : 0;
+
+      // Pausa la música de la otra tarjeta si está abierta
+      if (cards[otherCardIndex].classList.contains('flipped')) {
+        const otherIframe = cards[otherCardIndex].querySelector('iframe');
+        if (otherIframe) {
+          otherIframe.contentWindow.postMessage({ command: 'pause' }, '*');
         }
-    </script>
+        cards[otherCardIndex].classList.remove('flipped');
+      }
+
+      // Activa/desactiva la tarjeta seleccionada
+      cardElement.classList.toggle('flipped');
+
+      // Si se abre la tarjeta, reproduce la música
+      if (cardElement.classList.contains('flipped')) {
+        setTimeout(() => {
+          const iframe = cardElement.querySelector('iframe');
+          if (iframe) {
+            iframe.focus();
+            iframe.contentWindow.postMessage({ command: 'play' }, '*');
+          }
+        }, 300);
+      } else {
+        // Si se cierra, pausa la música
+        const iframe = cardElement.querySelector('iframe');
+        if (iframe) {
+          iframe.contentWindow.postMessage({ command: 'pause' }, '*');
+        }
+      }
+    }
+  </script>
 </body>
 </html>
+
